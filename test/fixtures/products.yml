@@ -1,13 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  title: MyString
-  description: MyText
-  image_url: MyString
+best_product_on_the_world:
+  title: best_product_on_the_world
+  description: the best product in the world
+  image_url: dcbang.jpeg
   price: 9.99
 
-two:
-  title: MyString
-  description: MyText
-  image_url: MyString
-  price: 9.99
+second_best_product:
+  title: second_best_product
+  description: the second best product in the world
+  image_url: adrpo.jpeg
+  price: 19.99

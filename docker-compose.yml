@@ -1,6 +1,6 @@
 version: "3.3"
 services:
-  db:
+  db-dev:
     image: mysql:5.7
     restart: always
     environment:
@@ -14,5 +14,19 @@ services:
       - "3306"
     volumes:
       - my-db:/var/lib/mysql
+
+  db-test:
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_DATABASE: "depot-test"
+      MYSQL_USER: "user"
+      MYSQL_PASSWORD: "password"
+      MYSQL_ROOT_PASSWORD: "password"
+    ports:
+      - "10006:3306"
+    volumes:
+      - my-db-test:/var/lib/mysql
 volumes:
   my-db:
+  my-db-test:
