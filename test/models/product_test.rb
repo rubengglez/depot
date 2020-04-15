@@ -20,11 +20,11 @@ class ProductTest < ActiveSupport::TestCase
     )
     product.price = -1
     assert product.invalid?
-    assert_equal ["must be greater than or equal to 1.0"],
+    assert_equal ["price should be greater than or equal to 1.0"],
                  product.errors[:price]
     product.price = 0
     assert product.invalid?
-    assert_equal ["must be greater than or equal to 1.0"],
+    assert_equal ["price should be greater than or equal to 1.0"],
                  product.errors[:price]
     product.price = 1
     assert product.valid?
@@ -58,5 +58,12 @@ class ProductTest < ActiveSupport::TestCase
                           image_url: "fred.gif")
     assert product.invalid?
     assert_equal ["has already been taken"], product.errors[:title]
+  end
+
+  test "product is not valid with a title lower than 10 characters" do
+    hashData = products(:best_product_on_the_world).attributes
+    hashData["title"] = "testtest1"
+    product = Product.new(hashData)
+    assert product.invalid?
   end
 end
