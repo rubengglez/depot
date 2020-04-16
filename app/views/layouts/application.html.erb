@@ -20,6 +20,7 @@
           <li><a href="/news">News</a></li>
           <li><a href="/contact">Contact</a></li>
         </ul>
+        <p class="dateTime" >Date and Time: <%= DateTime.now.strftime %></p>
       </nav>
       <main class='<%= controller.controller_name %>'>
         <%= yield %>
