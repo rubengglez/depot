@@ -11,3 +11,9 @@ second_best_product:
   description: the second best product in the world
   image_url: adrpo.jpeg
   price: 19.99
+
+second_best_product2:
+  title: second_best_product
+  description: the other second best product in the world
+  image_url: adrpo.jpeg
+  price: 19.99
