@@ -64,3 +64,7 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem "rufo", "~> 0.12.0", :group => :development
+
+gem "solargraph", "~> 0.38.6", :group => :development
+
+gem "htmlbeautifier", "~> 1.3", :group => :development
