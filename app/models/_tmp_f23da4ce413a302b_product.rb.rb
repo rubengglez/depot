@@ -15,13 +15,14 @@ class Product < ApplicationRecord
   }
   validates :title, uniqueness: true, length: { minimum: 10 }
 
+  module CurrentCart
   private
 
-  # ensure that there are no line items referencing this product
-  def ensure_not_referenced_by_any_line_item
-    unless line_items.empty?
-      errors.add(:base, 'Line Items present')
-      throw :abort
+    def set_cart
+      @cart = Cart.find(session[:cart_id])
+    rescue ActiveRecord::RecordNotFound
+      @cart = Cart.create
+      session[:cart_id] = @cart.id
     end
-  end
+end
 end

@@ -10,6 +10,6 @@ class StoreControllerTest < ActionDispatch::IntegrationTest
     assert_select 'main ul.catalog li', 3
     assert_select 'h2', 'best_product_on_the_world'
     assert_select 'h2', 'second_best_product'
-    assert_select '.price', /\$[,\d]+\.\d\d/
+    assert_select '.price', /[,\d]+\.\d\d\s€$/
   end
 end
