@@ -1,6 +1,9 @@
 <% if notice %>
   <aside id="notice"><%= notice %></aside>
 <% end %>
+<div class="num_visits">
+  <p><%= pluralize(@visits, 'visit') if @visits > 5 %></p>
+</div>
 <h1>Your Pragmatic Catalog</h1>
 <ul class="catalog">
   <% cache @products do %>
