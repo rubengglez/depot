@@ -17,14 +17,15 @@ class LineItemsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test 'should create line_item' do
+  test 'should create line_item and reset the counter in the session' do
     assert_difference('LineItem.count') do
       post line_items_url, params: { product_id: products(:best_product_on_the_world).id }
     end
 
     follow_redirect!
-    assert_select 'h2', 'Your Pragmatic Cart'
-    assert_select 'li', 'best_product_on_the_world'
+    assert_select 'h2', 'Your Cart'
+    assert_select 'td', 'best_product_on_the_world'
+    assert_equal session[:counter], 0
   end
 
   test 'should show line_item' do
@@ -38,7 +39,7 @@ class LineItemsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should update line_item' do
-    patch line_item_url(@line_item), params: { line_item: { cart_id: @line_item.cart_id, product_id: @line_item.product_id } }
+    patch line_item_url(@line_item), params: { line_item: { product_id: @line_item.product_id } }
     assert_redirected_to line_item_url(@line_item)
   end
 
