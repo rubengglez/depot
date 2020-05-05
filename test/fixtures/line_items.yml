@@ -3,7 +3,11 @@
 one:
   product: best_product_on_the_world
   cart: one
+  price: 5.5
+  quantity: 2
 
 two:
   product: best_product_on_the_world
   cart: two
+  price: 5.5
+  quantity: 2

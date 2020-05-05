@@ -50,4 +50,15 @@ class CartsControllerTest < ActionDispatch::IntegrationTest
 
     assert_redirected_to store_index_url
   end
+
+  test 'should not access to other carts that is not owner' do
+    assert_difference('Cart.count') do
+      post carts_url, params: { cart: {} }
+    end
+
+    assert_redirected_to cart_url(Cart.last)
+
+    get cart_url(carts(:two))
+    assert_redirected_to store_index_url, notice: 'You only can access to your own cart'
+  end
 end

@@ -15,7 +15,7 @@ class StoreControllerTest < ActionDispatch::IntegrationTest
     assert_equal session[:counter], 1
   end
 
-  test 'when the sotre is visited several times, then the counter should store the times' do
+  test 'when the store is visited several times, then the counter should store the times' do
     get store_index_url
     get store_index_url
 

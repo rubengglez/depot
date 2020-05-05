@@ -6,6 +6,7 @@
   <table>
     <% @cart.line_items.each do |line_item| %>
       <tr>
+        <td><%= link_to 'Delete', line_item_path(line_item), method: "delete" %></td>
         <td class="quantity"><%= line_item.quantity %></td>
         <td><%= line_item.product.title %></td>
         <td class="price"><%= toEuros(line_item.total_price) %></td>

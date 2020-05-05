@@ -2,6 +2,7 @@
 
 class CartsController < ApplicationController
   before_action :set_cart, only: %i[show edit update destroy]
+  before_action :own_cart, only: %i[show edit update destroy]
   rescue_from ActiveRecord::RecordNotFound, with: :invalid_cart
 
   # GET /carts
@@ -73,6 +74,13 @@ class CartsController < ApplicationController
   # Only allow a list of trusted parameters through.
   def cart_params
     params.fetch(:cart, {})
+  end
+
+  def own_cart
+    logger.error 'Attempt access to a cart that doesnt belong to the user'
+    unless session[:cart_id] == @cart.id
+      redirect_to store_index_url, notice: 'You only can access to your own cart'
+    end
   end
 
   def invalid_cart
