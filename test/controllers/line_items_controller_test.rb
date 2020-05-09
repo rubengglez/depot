@@ -17,6 +17,15 @@ class LineItemsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test 'should create line_item via ajax' do
+    assert_difference('LineItem.count') do
+      post line_items_url, params: { product_id: products(:best_product_on_the_world).id },
+                           xhr: true
+    end
+    assert_response :success
+    assert_match /<tr class=\\"line-item-highlight/, @response.body
+  end
+
   test 'should create line_item and reset the counter in the session' do
     assert_difference('LineItem.count') do
       post line_items_url, params: { product_id: products(:best_product_on_the_world).id }
@@ -25,7 +34,6 @@ class LineItemsControllerTest < ActionDispatch::IntegrationTest
     follow_redirect!
     assert_select 'h2', 'Your Cart'
     assert_select 'td', 'best_product_on_the_world'
-    assert_equal session[:counter], 0
   end
 
   test 'should show line_item' do
