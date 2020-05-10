@@ -49,6 +49,8 @@ class ProductsController < ApplicationController
         @products = Product.all
         # TODO: move this from here
         @visits = 1
+        # TODO: testing this
+        @product_updated = @product
         ActionCable.server.broadcast 'products',
                                      html: render_to_string('store/index', layout: false)
 

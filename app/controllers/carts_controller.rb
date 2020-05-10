@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class CartsController < ApplicationController
-  before_action :set_cart, only: %i[show edit update destroy]
-  before_action :own_cart, only: %i[show edit update destroy]
+  before_action :set_cart, only: %i[show edit update destroy decrement_amount]
+  before_action :own_cart, only: %i[show edit update destroy decrement_amount]
   rescue_from ActiveRecord::RecordNotFound, with: :invalid_cart
 
   # GET /carts
@@ -60,7 +60,17 @@ class CartsController < ApplicationController
     session[:cart_id] = nil
     respond_to do |format|
       format.html { redirect_to store_index_url, notice: 'Your cart is currently empty' }
+      format.js {}
       format.json { head :no_content }
+    end
+  end
+
+  def decrement_amount
+    line_item = params[:line_item]
+    @cart.decrementQuantity(line_item)
+    @cart.save
+    respond_to do |format|
+      format.js {}
     end
   end
 

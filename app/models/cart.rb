@@ -14,6 +14,13 @@ class Cart < ApplicationRecord
     current_item
   end
 
+  def decrementQuantity(line_item_id)
+    item = line_items.find(line_item_id)
+    item.quantity -= 1
+    item.save!
+    line_items.delete(item) if item.quantity <= 0
+  end
+
   def total_price
     line_items.to_a.sum(&:total_price)
   end
